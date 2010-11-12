@@ -8,12 +8,14 @@ import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.I18nHelper;
 
 public class MainFrame extends JFrame {
-    public MainFrame() throws HeadlessException {
+    public MainFrame(Stats stats) throws HeadlessException {
         super();
 
         setTitle(I18nHelper.getString("title"));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setSize(Config.getIntValue("frame.width"), Config.getIntValue("frame.height"));
+
+        setContentPane(new MainPanel(stats));
     }
 }

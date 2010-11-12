@@ -13,7 +13,7 @@ public class Config {
             properties.load(Config.class.getResourceAsStream(CONFIG_FILE));
         } catch (IOException e) {
             e.printStackTrace();
-            
+
             System.exit(-1);
         }
     }

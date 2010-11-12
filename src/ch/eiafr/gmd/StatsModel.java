@@ -11,9 +11,11 @@ import java.util.List;
 public class StatsModel implements Stats {
     private final Collection<StatsListener> listeners = new ArrayList<StatsListener>(2);
 
+    private final List<Result> results = new ArrayList<Result>(25);
+
     @Override
     public List<Result> getResults() {
-        return null;  //TODO Implement that !
+        return results;
     }
 
     @Override
@@ -26,8 +28,8 @@ public class StatsModel implements Stats {
         listeners.remove(listener);
     }
 
-    private void fireStatsModified(){
-        for(StatsListener listener : listeners){
+    private void fireStatsModified() {
+        for (StatsListener listener : listeners) {
             listener.fireStatsModified();
         }
     }
