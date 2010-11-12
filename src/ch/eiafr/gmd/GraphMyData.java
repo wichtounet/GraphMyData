@@ -2,7 +2,7 @@ package ch.eiafr.gmd;
 
 import javax.swing.SwingUtilities;
 
-public class GraphMyData {
+public final class GraphMyData {
     public static void main(String[] args) {
         final Stats stats = new StatsModel();
 

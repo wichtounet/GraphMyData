@@ -3,7 +3,7 @@ package ch.eiafr.gmd;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ButtonPanel extends JPanel {
+public final class ButtonPanel extends JPanel {
     public ButtonPanel() {
         super();
 

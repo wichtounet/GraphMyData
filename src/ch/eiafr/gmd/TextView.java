@@ -4,7 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class TextView extends JPanel implements StatsListener {
+public final class TextView extends JPanel implements StatsListener {
     private final Stats stats;
 
     protected TextView(Stats stats) {

@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-public class MainPanel extends JPanel {
+public final class MainPanel extends JPanel {
     public MainPanel(Stats stats) {
         super(new GridBagLayout());
 
