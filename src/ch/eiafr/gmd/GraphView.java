@@ -7,5 +7,13 @@ import javax.swing.JComponent;
  * Settings | File Templates.
  */
 public abstract class GraphView extends JComponent implements StatsListener {
+    private final Stats stats;
 
+    protected GraphView(Stats stats) {
+        this.stats = stats;
+    }
+
+    protected Stats getStats() {
+        return stats;
+    }
 }
