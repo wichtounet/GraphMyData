@@ -7,5 +7,5 @@ import javax.swing.JPanel;
  * Settings | File Templates.
  */
 public class DataView extends JPanel {
-    //    I love my life!
+    //    test
 }
