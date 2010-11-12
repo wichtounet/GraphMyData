@@ -10,12 +10,10 @@ import java.util.List;
  */
 public class StatsModel implements Stats {
     private final Collection<StatsListener> listeners = new ArrayList<StatsListener>(2);
-    
+
     @Override
     public List<Result> getResults() {
-
-        //asdfasdfadsf
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO Implement that !
     }
 
     @Override

@@ -2,10 +2,18 @@ package ch.eiafr.gmd;
 
 import javax.swing.JFrame;
 
-/**
- * Created by IntelliJ IDEA. User: wichtounet Date: Nov 5, 2010 Time: 11:27:16 AM To change this template use File |
- * Settings | File Templates.
- */
+import java.awt.HeadlessException;
+
+import ch.eiafr.gmd.helpers.Config;
+import ch.eiafr.gmd.helpers.I18nHelper;
+
 public class MainFrame extends JFrame {
-    
+    public MainFrame() throws HeadlessException {
+        super();
+
+        setTitle(I18nHelper.getString("title"));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        setSize(Config.getIntValue("frame.width"), Config.getIntValue("frame.height"));
+    }
 }

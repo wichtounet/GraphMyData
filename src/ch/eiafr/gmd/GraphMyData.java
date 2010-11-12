@@ -1,8 +1,14 @@
 package ch.eiafr.gmd;
 
-public class GraphMyData {
-    // git rocks
-    public static void main(String[] args) {
+import javax.swing.SwingUtilities;
 
+public class GraphMyData {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
     }
 }
