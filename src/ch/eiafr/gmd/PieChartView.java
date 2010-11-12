@@ -11,6 +11,6 @@ public class PieChartView extends GraphView {
 
     @Override
     public void fireStatsModified() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO
     }
 }
