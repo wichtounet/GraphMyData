@@ -9,6 +9,7 @@ public final class GraphMyData {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                // TODO test
                 new MainFrame(stats).setVisible(true);
             }
         });
