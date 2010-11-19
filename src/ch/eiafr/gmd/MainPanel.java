@@ -1,6 +1,7 @@
 package ch.eiafr.gmd;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -48,6 +49,6 @@ public final class MainPanel extends JPanel {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        add(new HistogramView(stats), constraints);
+        add(new JScrollPane(new HistogramView(stats)), constraints);
     }
 }
