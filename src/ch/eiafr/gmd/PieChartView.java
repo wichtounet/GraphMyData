@@ -47,8 +47,7 @@ public class PieChartView extends GraphView {
             }
         }
         
-        Arc2D.Double circle = new Arc2D.Double(10, 10, 100, 100, 0, 60, Arc2D.PIE);
-        g2d.draw(circle);
+        new PieFullCircle(values[0],10,10,200,200).draw(g2d);
         
     }
     
