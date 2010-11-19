@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
@@ -44,10 +45,16 @@ public class DataView extends JPanel {
 
         JTable table = new JTable(tableModel);
 
+        AddAction addAction = new AddAction(controller);
+        DeleteAction deleteAction = new DeleteAction(controller, table, tableModel);
+
         KeyStroke delete = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
         table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), delete);
-        table.getActionMap().put(table.getInputMap().get(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0)),
-                new DeleteAction(controller, table, tableModel));
+        table.getActionMap().put(table.getInputMap().get(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0)), deleteAction);
+
+        KeyStroke add = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0);
+        table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0), add);
+        table.getActionMap().put(table.getInputMap().get(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0)), addAction);
 
         JScrollPane scrollPane = new JScrollPane(table);
 
@@ -60,15 +67,11 @@ public class DataView extends JPanel {
         constraints.fill = GridBagConstraints.NONE;
         constraints.weighty = 0.0;
 
-        add(new ButtonPanel(controller, table, tableModel), constraints);
-    }
+        Container buttonPanel = new JPanel();
 
-    private static final class ButtonPanel extends JPanel {
-        private ButtonPanel(StatsController controller, JTable table, DataTableModel tableModel) {
-            super();
+        buttonPanel.add(new JButton(addAction));
+        buttonPanel.add(new JButton(deleteAction));
 
-            add(new JButton(new AddAction(controller)));
-            add(new JButton(new DeleteAction(controller, table, tableModel)));
-        }
+        add(buttonPanel, constraints);
     }
 }
