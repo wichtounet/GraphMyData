@@ -6,9 +6,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
 
 import ch.eiafr.gmd.helpers.I18nHelper;
 
@@ -41,7 +43,12 @@ public class DataView extends JPanel {
         stats.addStatsListener(tableModel);
 
         JTable table = new JTable(tableModel);
-        
+
+        KeyStroke delete = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+        table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), delete);
+        table.getActionMap().put(table.getInputMap().get(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0)),
+                new DeleteAction(controller, table, tableModel));
+
         JScrollPane scrollPane = new JScrollPane(table);
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
