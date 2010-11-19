@@ -8,7 +8,7 @@ import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.I18nHelper;
 
 public class MainFrame extends JFrame {
-    public MainFrame(Stats stats) throws HeadlessException {
+    public MainFrame(Stats stats, StatsController controller) throws HeadlessException {
         super();
 
         setTitle(I18nHelper.getString("title"));
@@ -16,6 +16,6 @@ public class MainFrame extends JFrame {
 
         setSize(Config.getIntValue("frame.width"), Config.getIntValue("frame.height"));
 
-        setContentPane(new MainPanel(stats));
+        setContentPane(new MainPanel(stats, controller));
     }
 }

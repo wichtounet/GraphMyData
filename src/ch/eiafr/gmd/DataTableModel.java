@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 import ch.eiafr.gmd.helpers.I18nHelper;
 
-public class DataTableModel extends AbstractTableModel {
+public class DataTableModel extends AbstractTableModel implements StatsListener {
     private final Stats stats;
 
     private final String[] headers = {
@@ -39,5 +39,10 @@ public class DataTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return headers.length;
+    }
+
+    @Override
+    public void fireStatsModified() {
+        fireTableDataChanged();
     }
 }

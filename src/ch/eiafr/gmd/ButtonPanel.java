@@ -4,10 +4,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public final class ButtonPanel extends JPanel {
-    public ButtonPanel() {
+    public ButtonPanel(StatsController controller) {
         super();
 
-        add(new JButton("Test1"));
+        add(new JButton(new AddAction(controller)));
         add(new JButton("Test2"));
     }
 }

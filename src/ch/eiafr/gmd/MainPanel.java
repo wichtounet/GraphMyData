@@ -6,13 +6,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 public final class MainPanel extends JPanel {
-    public MainPanel(Stats stats) {
+    public MainPanel(Stats stats, StatsController controller) {
         super(new GridBagLayout());
 
-        build(stats);
+        build(stats, controller);
     }
 
-    private void build(Stats stats) {
+    private void build(Stats stats, StatsController controller) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 1;
         constraints.gridy = 1;
@@ -24,7 +24,7 @@ public final class MainPanel extends JPanel {
         constraints.weighty = 1.0;
         constraints.weightx = 1.0;
 
-        add(new DataView(stats), constraints);
+        add(new DataView(stats, controller), constraints);
 
         constraints.gridx = 2;
         constraints.gridy = 1;
