@@ -2,10 +2,14 @@ package ch.eiafr.gmd;
 
 import javax.swing.table.AbstractTableModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ch.eiafr.gmd.helpers.I18nHelper;
 
-public class DataTableModel extends AbstractTableModel {
+public class DataTableModel extends AbstractTableModel implements StatsListener {
     private final Stats stats;
+    private final List<Result> results;
 
     private final String[] headers = {
             I18nHelper.getString("table.header.first"),
@@ -16,6 +20,8 @@ public class DataTableModel extends AbstractTableModel {
         super();
 
         this.stats = stats;
+
+        results = new ArrayList<Result>(stats.getResults());
     }
 
     @Override
@@ -39,5 +45,17 @@ public class DataTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return headers.length;
+    }
+
+    @Override
+    public void fireStatsModified() {
+        results.clear();
+        results.addAll(stats.getResults());
+
+        fireTableDataChanged();
+    }
+
+    public Result getResult(int row) {
+        return stats.getResults().get(row);
     }
 }

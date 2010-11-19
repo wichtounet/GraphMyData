@@ -10,8 +10,6 @@ public final class TextView extends JPanel implements StatsListener {
     protected TextView(Stats stats) {
         this.stats = stats;
 
-        setBorder(BorderFactory.createBevelBorder(1));
-
         add(new JLabel("Text view !"));
     }
 

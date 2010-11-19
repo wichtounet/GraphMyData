@@ -14,9 +14,9 @@ public final class StatsModel implements Stats {
     public StatsModel() {
         super();
 
-        results.add(new SimpleResult(2, 5));
-        results.add(new SimpleResult(10, 15));
-        results.add(new SimpleResult(22, 25));
+        results.add(new SimpleResult(Arrays.asList(2, 5)));
+        results.add(new SimpleResult(Arrays.asList(10, 15)));
+        results.add(new SimpleResult(Arrays.asList(22, 25)));
     }
 
     @Override
@@ -40,14 +40,25 @@ public final class StatsModel implements Stats {
         }
     }
 
+    public void addResult(Integer[] values) {
+        results.add(new SimpleResult(Arrays.asList(values)));
 
-    private class SimpleResult implements Result {
+        fireStatsModified();
+    }
+
+    public void removeResult(Result result) {
+        results.remove(result);
+
+        fireStatsModified();
+    }
+
+    private static class SimpleResult implements Result {
         private final List<Integer> integers;
 
-        private SimpleResult(Integer... integers) {
+        private SimpleResult(List<Integer> values) {
             super();
 
-            this.integers = Arrays.asList(integers);
+            integers = new ArrayList<Integer>(values);
         }
 
         @Override

@@ -4,13 +4,13 @@ import javax.swing.SwingUtilities;
 
 public final class GraphMyData {
     public static void main(String[] args) {
-        final Stats stats = new StatsModel();
+        final StatsModel stats = new StatsModel();
+        final StatsController controller = new StatsController(stats);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // TODO test
-                new MainFrame(stats).setVisible(true);
+                new MainFrame(stats, controller).setVisible(true);
             }
         });
     }
