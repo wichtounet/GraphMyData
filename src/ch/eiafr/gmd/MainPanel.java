@@ -21,18 +21,25 @@ public final class MainPanel extends JPanel {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.RELATIVE;
 
-        constraints.fill = GridBagConstraints.BOTH;
+        constraints.fill = GridBagConstraints.VERTICAL;
         constraints.weighty = 1.0;
-        constraints.weightx = 1.0;
+        constraints.weightx = 0.0;
 
         add(new DataView(stats, controller), constraints);
+
+        constraints.fill = GridBagConstraints.HORIZONTAL;
 
         constraints.gridx = 2;
         constraints.gridy = 1;
         constraints.gridheight = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
+        constraints.weighty = 0.0;
+        constraints.weightx = 1.0;
+
         add(new TextView(stats), constraints);
+
+        constraints.fill = GridBagConstraints.BOTH;
 
         constraints.gridx = 2;
         constraints.gridy = 2;
@@ -40,6 +47,9 @@ public final class MainPanel extends JPanel {
 
         constraints.gridheight = GridBagConstraints.RELATIVE;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
+
+        constraints.weighty = 1.0;
+        constraints.weightx = 1.0;
 
         add(new PieChartView(stats), constraints);
 
