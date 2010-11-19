@@ -1,6 +1,7 @@
 package ch.eiafr.gmd;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,8 +39,10 @@ public class DataView extends JPanel {
 
         DataTableModel tableModel = new DataTableModel(stats);
         stats.addStatsListener(tableModel);
+
+        JTable table = new JTable(tableModel);
         
-        JScrollPane scrollPane = new JScrollPane(new JTable(tableModel));
+        JScrollPane scrollPane = new JScrollPane(table);
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -50,6 +53,15 @@ public class DataView extends JPanel {
         constraints.fill = GridBagConstraints.NONE;
         constraints.weighty = 0.0;
 
-        add(new ButtonPanel(controller), constraints);
+        add(new ButtonPanel(controller, table, tableModel), constraints);
+    }
+
+    private static final class ButtonPanel extends JPanel {
+        private ButtonPanel(StatsController controller, JTable table, DataTableModel tableModel) {
+            super();
+
+            add(new JButton(new AddAction(controller)));
+            add(new JButton(new DeleteAction(controller, table, tableModel)));
+        }
     }
 }
