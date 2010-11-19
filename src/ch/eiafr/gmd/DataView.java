@@ -23,8 +23,6 @@ public class DataView extends JPanel {
 
         this.stats = stats;
 
-        setBorder(BorderFactory.createBevelBorder(1));
-
         build(controller);
     }
 
