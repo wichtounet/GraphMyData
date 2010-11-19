@@ -2,6 +2,7 @@ package ch.eiafr.gmd;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 
 import javax.swing.BorderFactory;
@@ -46,7 +47,7 @@ public class PieChartView extends GraphView {
             }
         }
         
-        Ellipse2D.Float circle = new Ellipse2D.Float(150,20,80,80);
+        Arc2D.Double circle = new Arc2D.Double(10, 10, 100, 100, 0, 60, Arc2D.PIE);
         g2d.draw(circle);
         
     }
