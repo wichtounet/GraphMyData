@@ -37,7 +37,9 @@ public final class MainPanel extends JPanel {
         constraints.weighty = 0.0;
         constraints.weightx = 1.0;
 
-        add(new TextView(stats), constraints);
+        TextView textView = new TextView(stats);
+        stats.addStatsListener(textView);
+        add(textView, constraints);
 
         constraints.fill = GridBagConstraints.BOTH;
 
@@ -51,7 +53,9 @@ public final class MainPanel extends JPanel {
         constraints.weighty = 1.0;
         constraints.weightx = 1.0;
 
-        add(new PieChartView(stats), constraints);
+        PieChartView pieChartView = new PieChartView(stats);
+        stats.addStatsListener(pieChartView);
+        add(pieChartView, constraints);
 
         constraints.gridx = 2;
         constraints.gridy = 3;
@@ -59,6 +63,8 @@ public final class MainPanel extends JPanel {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        add(new JScrollPane(new HistogramView(stats)), constraints);
+        HistogramView histogramView = new HistogramView(stats);
+        stats.addStatsListener(histogramView);
+        add(new JScrollPane(histogramView), constraints);
     }
 }
