@@ -28,13 +28,7 @@ public class DataTableModel extends AbstractTableModel implements StatsListener 
     public Object getValueAt(int row, int column) {
         Result r = stats.getResults().get(row);
 
-        if (column == 0) {
-            return r.getValues().get(1);
-        } else if (column == 1) {
-            return r.getValues().get(1);
-        }
-
-        throw new IllegalStateException("System cannot be in this state");
+        return r.getValues().get(column);
     }
 
     @Override

@@ -1,10 +1,10 @@
 package ch.eiafr.gmd;
 
+import javax.swing.BorderFactory;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.List;
-
-import javax.swing.BorderFactory;
 
 public class HistogramView extends GraphView {
     
@@ -19,6 +19,7 @@ public class HistogramView extends GraphView {
 
     @Override
     public void fireStatsModified() {
+
         //if(stats.getResults().size() < 2)
             //throw new IllegalStateException("There must be min 2 results in ");
         
