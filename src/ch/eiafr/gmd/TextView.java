@@ -8,6 +8,7 @@ import java.awt.font.TextAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.eiafr.gmd.helpers.I18nHelper;
 import com.atticlabs.zonelayout.swing.ZoneLayout;
 import com.atticlabs.zonelayout.swing.ZoneLayoutFactory;
 
@@ -42,15 +43,15 @@ public final class TextView extends JPanel implements StatsListener {
 
         bestLabel = new JLabel();
         add(bestLabel, "t");
-
+        
         Map<TextAttribute, Integer> fontAttributes = new HashMap<TextAttribute, Integer>(1);
         fontAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 
-        Component firstLabelTitle = new JLabel("Premier test");
+        Component firstLabelTitle = new JLabel(I18nHelper.getString("table.header.first"));
         firstLabelTitle.setFont(firstLabelTitle.getFont().deriveFont(fontAttributes));
         add(firstLabelTitle, "z");
 
-        Component secondLabelTitle = new JLabel("Second test");
+        Component secondLabelTitle = new JLabel(I18nHelper.getString("table.header.second"));
         secondLabelTitle.setFont(secondLabelTitle.getFont().deriveFont(fontAttributes));
         add(secondLabelTitle, "s");
 
