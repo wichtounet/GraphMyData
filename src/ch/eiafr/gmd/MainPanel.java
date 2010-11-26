@@ -46,7 +46,7 @@ public final class MainPanel extends JPanel {
         add(textView, constraints);
 
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.insets = new Insets(10, 0, 0, 0);
 
         constraints.gridx = 2;
         constraints.gridy = 2;
