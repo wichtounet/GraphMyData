@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public final class MainPanel extends JPanel {
     public MainPanel(Stats stats, StatsController controller) {
@@ -23,6 +24,7 @@ public final class MainPanel extends JPanel {
         constraints.gridwidth = GridBagConstraints.RELATIVE;
 
         constraints.fill = GridBagConstraints.VERTICAL;
+        constraints.insets = new Insets(25,10,10,10);
         constraints.weighty = 1.0;
         constraints.weightx = 0.0;
 
@@ -34,6 +36,7 @@ public final class MainPanel extends JPanel {
         constraints.gridy = 1;
         constraints.gridheight = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
+        constraints.insets = new Insets(0,0,0,0);
 
         constraints.weighty = 0.0;
         constraints.weightx = 1.0;

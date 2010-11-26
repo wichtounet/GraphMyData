@@ -30,10 +30,6 @@ public class DataView extends JPanel {
 
         constraints.gridx = GridBagConstraints.REMAINDER;
         constraints.gridy = 1;
-
-        add(new JLabel(I18nHelper.getString("label.data")), constraints);
-
-        constraints.gridy = 2;
         constraints.fill = GridBagConstraints.VERTICAL;
         constraints.weighty = 1.0;
 
@@ -60,7 +56,7 @@ public class DataView extends JPanel {
 
         add(scrollPane, constraints);
 
-        constraints.gridy = 3;
+        constraints.gridy = 2;
         constraints.fill = GridBagConstraints.NONE;
         constraints.weighty = 0.0;
 
