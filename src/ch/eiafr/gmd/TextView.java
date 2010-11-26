@@ -16,6 +16,8 @@ public final class TextView extends JPanel implements StatsListener {
 
         averageLabel = new JLabel();
 
+        add(averageLabel);
+
         computeStats();
         refreshView();
     }
@@ -40,7 +42,9 @@ public final class TextView extends JPanel implements StatsListener {
     }
 
     private void refreshView() {
-        //To change body of created methods use File | Settings | File Templates.
+        int best = compute1.average < compute2.average ? 1 : 2;
+
+        averageLabel.setText("Meilleur test : " + best);
     }
 
     @Override
