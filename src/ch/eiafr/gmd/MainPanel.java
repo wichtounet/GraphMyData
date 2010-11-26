@@ -1,5 +1,6 @@
 package ch.eiafr.gmd;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -65,6 +66,9 @@ public final class MainPanel extends JPanel {
 
         HistogramView histogramView = new HistogramView(stats);
         stats.addStatsListener(histogramView);
-        add(new JScrollPane(histogramView), constraints);
+        
+        JComponent scroll = new JScrollPane(histogramView);
+        scroll.setBorder(null);
+        add(scroll, constraints);
     }
 }

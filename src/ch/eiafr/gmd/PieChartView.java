@@ -2,10 +2,6 @@ package ch.eiafr.gmd;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Ellipse2D;
-
-import javax.swing.BorderFactory;
 
 /**
  * Class to display a pie chart 
@@ -14,13 +10,12 @@ import javax.swing.BorderFactory;
  *
  */
 public class PieChartView extends GraphView {
-    
-    private Stats stats;
+    private final Stats stats;
     
     protected PieChartView(Stats stats) {
-        super(stats); 
+        super(stats);
+
         this.stats = stats;
-        setBorder(BorderFactory.createBevelBorder(1));
     }
 
     @Override
