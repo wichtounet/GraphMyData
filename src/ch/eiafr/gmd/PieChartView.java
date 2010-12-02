@@ -36,13 +36,22 @@ public class PieChartView extends GraphView {
         {
             for(int value:r.getValues())
             {
+                
                 if(value<10)values[i][0]++;
                 else if(value<25)values[i][1]++;
                 else values[i][2]++;
             }
         }
+        int size;
+        if(getWidth()<getHeight())
+            size = (getWidth())-20;
+        else
+            size = (getHeight())-20;
         
-        new PieFullCircle(values[0],10,10,200,200).draw(g2d);
+        
+        String title[] = new String[]{"< 10","< 25","> 25"};
+        
+        new PieFullCircle(title, values[0],10,10,size,size).draw(g2d);
         
     }
     
