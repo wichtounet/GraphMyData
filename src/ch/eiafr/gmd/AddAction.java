@@ -25,19 +25,21 @@ public class AddAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         String input = JOptionPane.showInputDialog(null, I18nHelper.getString("actions.add.ask"));
 
-        String[] parts = PATTERN.split(input);
-        Integer[] values = new Integer[parts.length];
+        if(input != null){
+            String[] parts = PATTERN.split(input);
+            Integer[] values = new Integer[parts.length];
 
-        if(parts.length < 2){
-            JOptionPane.showMessageDialog(null, I18nHelper.getString("actions.add.errors.not.enough"));
-        } else if(parts.length > 2){
-            JOptionPane.showMessageDialog(null, I18nHelper.getString("actions.add.errors.too.many"));
-        } else {
-            for (int i = 0; i < parts.length; i++) {
-                values[i] = Integer.parseInt(parts[i].trim());
+            if(parts.length < 2){
+                JOptionPane.showMessageDialog(null, I18nHelper.getString("actions.add.errors.not.enough"));
+            } else if(parts.length > 2){
+                JOptionPane.showMessageDialog(null, I18nHelper.getString("actions.add.errors.too.many"));
+            } else {
+                for (int i = 0; i < parts.length; i++) {
+                    values[i] = Integer.parseInt(parts[i].trim());
+                }
+
+                controller.addResult(values);
             }
-
-            controller.addResult(values);
         }
     }
 }
