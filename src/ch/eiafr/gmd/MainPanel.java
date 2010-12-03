@@ -68,6 +68,8 @@ public final class MainPanel extends JPanel {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
+        constraints.insets = new Insets(10, 10, 0, 0);
+
         HistogramView histogramView = new HistogramView(stats);
         stats.addStatsListener(histogramView);
         
