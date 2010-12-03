@@ -68,7 +68,6 @@ public class HistogramView extends GraphView {
         //g2d.setTransform(getCartesianCoordinateTransform(100, new Insets(0, 0, 0, 0)));
         AffineTransform transform = getCartesianCoordinateTransform(200, new Insets(0, 0, 0, 0));
         //g2d.setTransform(transform);
-        System.out.println("height: " + getHeight());
         
         g2d.scale(1, getHeight() / (double)maxValue);
         

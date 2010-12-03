@@ -31,8 +31,6 @@ public class PieFullCircle implements Drawable{
         
         // Compute the sum of all the parts
         for(int i:parts)sum+=i;
-        
-        System.out.println("Sum full circle: "+sum);
     }
     
     @Override
