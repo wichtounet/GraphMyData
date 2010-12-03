@@ -21,7 +21,7 @@ public final class MainPanel extends JPanel {
         constraints.gridy = 1;
 
         constraints.gridheight = GridBagConstraints.REMAINDER;
-        constraints.gridwidth = GridBagConstraints.RELATIVE;
+        constraints.gridwidth = 1;
 
         constraints.fill = GridBagConstraints.VERTICAL;
         constraints.insets = new Insets(25,10,10,10);

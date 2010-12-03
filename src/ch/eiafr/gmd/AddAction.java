@@ -28,10 +28,16 @@ public class AddAction extends AbstractAction {
         String[] parts = PATTERN.split(input);
         Integer[] values = new Integer[parts.length];
 
-        for (int i = 0; i < parts.length; i++) {
-            values[i] = Integer.parseInt(parts[i].trim());
-        }
+        if(parts.length < 2){
+            JOptionPane.showMessageDialog(null, I18nHelper.getString("actions.add.errors.not.enough"));
+        } else if(parts.length > 2){
+            JOptionPane.showMessageDialog(null, I18nHelper.getString("actions.add.errors.too.many"));
+        } else {
+            for (int i = 0; i < parts.length; i++) {
+                values[i] = Integer.parseInt(parts[i].trim());
+            }
 
-        controller.addResult(values);
+            controller.addResult(values);
+        }
     }
 }

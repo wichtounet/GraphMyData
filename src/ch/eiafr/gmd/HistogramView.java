@@ -66,13 +66,12 @@ public class HistogramView extends GraphView {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         //g2d.setTransform(getCartesianCoordinateTransform(100, new Insets(0, 0, 0, 0)));
-        AffineTransform transform = getCartesianCoordinateTransform(200, new Insets(0, 0, 0, 0));
-        //g2d.setTransform(transform);
-        
-        g2d.scale(1, getHeight() / (double)maxValue);
-        
+        AffineTransform transform = getCartesianCoordinateTransform(getHeight(), new Insets(0, 0, 0, 0));
+        //g2d.transform(transform);
+
+        //g2d.scale(1, getHeight() / maxValue);
         g2d.drawString("Hello", 15, 15);
-        
+
         // Draw all objects
         for(Drawable object : drawableObjs)
             object.draw(g2d);

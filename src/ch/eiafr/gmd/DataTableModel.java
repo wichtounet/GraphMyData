@@ -42,6 +42,11 @@ public class DataTableModel extends AbstractTableModel implements StatsListener 
     }
 
     @Override
+    public String getColumnName(int column) {
+        return headers[column];
+    }
+
+    @Override
     public void fireStatsModified() {
         results.clear();
         results.addAll(stats.getResults());

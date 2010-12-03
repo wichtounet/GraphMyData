@@ -31,13 +31,12 @@ public final class TextView extends JPanel implements StatsListener {
 
         ZoneLayout layout = ZoneLayoutFactory.newZoneLayout();
 
-        layout.addRow("t......t");
-        layout.addRow("....7...");
-        layout.addRow("z~~zs~~s");
-        layout.addRow("....5...");
-        layout.addRow("a<.ab<.b");
-        layout.addRow("c<.cd<.d");
-        layout.addRow("e<.ef<.f");
+        layout.addRow("t<......t");
+        layout.addRow("....7....");
+        layout.addRow("z..z4s..s");
+        layout.addRow("a<.a4b<.b");
+        layout.addRow("c<.c4d<.d");
+        layout.addRow("e<.e4f<.f");
 
         setLayout(layout);
 
@@ -104,16 +103,16 @@ public final class TextView extends JPanel implements StatsListener {
     private void refreshView() {
         int best = compute1.average < compute2.average ? 1 : 2;
 
-        bestLabel.setText("Meilleur test : " + best);
+        bestLabel.setText(I18nHelper.getString("text.best") + " : " + best);
 
-        averageLabel1.setText(String.format("Moyenne : %.2fs", compute1.average));
-        averageLabel2.setText(String.format("Moyenne : %.2fs", compute2.average));
+        averageLabel1.setText(String.format(I18nHelper.getString("text.average") + " : %.2fs", compute1.average));
+        averageLabel2.setText(String.format(I18nHelper.getString("text.average") + " : %.2fs", compute2.average));
 
-        minLabel1.setText(String.format("Min : %.2fs", compute1.min));
-        minLabel2.setText(String.format("Min : %.2fs", compute2.min));
+        minLabel1.setText(String.format(I18nHelper.getString("text.min") + " : %.2fs", compute1.min));
+        minLabel2.setText(String.format(I18nHelper.getString("text.min") + " : %.2fs", compute2.min));
 
-        maxLabel1.setText(String.format("Max : %.2fs", compute1.max));
-        maxLabel2.setText(String.format("Max : %.2fs", compute2.max));
+        maxLabel1.setText(String.format(I18nHelper.getString("text.max") + " : %.2fs", compute1.max));
+        maxLabel2.setText(String.format(I18nHelper.getString("text.max") + " : %.2fs", compute2.max));
     }
 
     @Override

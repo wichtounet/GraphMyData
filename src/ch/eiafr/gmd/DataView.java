@@ -22,13 +22,15 @@ public class DataView extends JPanel {
         this.stats = stats;
 
         build(controller);
+
+        setMinimumSize(getSize());
     }
 
     private void build(StatsController controller) {
         GridBagConstraints constraints = new GridBagConstraints();
 
-        constraints.gridx = GridBagConstraints.REMAINDER;
-        constraints.gridy = 1;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
         constraints.fill = GridBagConstraints.VERTICAL;
         constraints.weighty = 1.0;
 
@@ -50,7 +52,7 @@ public class DataView extends JPanel {
 
         add(scrollPane, constraints);
 
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         constraints.fill = GridBagConstraints.NONE;
         constraints.weighty = 0.0;
 
