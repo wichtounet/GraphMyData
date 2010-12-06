@@ -23,7 +23,7 @@ public class HistogramBar implements Drawable {
         Color contextColor = g2d.getColor();
         
         g2d.setColor(color);
-        g2d.fillRect(position, 10, 20, height);
+        g2d.fillRect(position, 0, 20, height);
         g2d.setColor(contextColor);
     }
 }
