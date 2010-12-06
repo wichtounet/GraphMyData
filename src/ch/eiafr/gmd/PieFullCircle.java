@@ -39,6 +39,7 @@ public class PieFullCircle implements Drawable{
     public void draw(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
+        
         Arc2D.Double tmpArc;
         int startAngle = 0;
         int endAngle   = 0;
