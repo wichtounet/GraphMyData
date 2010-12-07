@@ -1,6 +1,5 @@
 package ch.eiafr.gmd;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class HistogramView extends GraphView {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
-        GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());;
+        GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());
         
         g2d.translate(0, PADDING_BOTTOM);
         g2d.scale(1, (getHeight() - PADDING_BOTTOM) / (double)maxValue);

@@ -31,13 +31,12 @@ public class PieFullCircle implements Drawable{
         
         // Compute the sum of all the parts
         for(int i:parts)sum+=i;
-        
-        System.out.println("Sum full circle: "+sum);
     }
     
     @Override
     public void draw(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
         
         Arc2D.Double tmpArc;
         int startAngle = 0;
