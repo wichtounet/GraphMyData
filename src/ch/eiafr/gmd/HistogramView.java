@@ -1,13 +1,12 @@
 package ch.eiafr.gmd;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ch.eiafr.gmd.helpers.GraphicsUtils;
-
 
 /**
  * View to draw an histogram graph
@@ -18,62 +17,42 @@ public class HistogramView extends GraphView {
 
     private List<Drawable> drawableObjs;
     private double maxValue;
-
+    private int width;
+    
     protected HistogramView(Stats stats) {
         super(stats);
         update();
     }
-
+    
     @Override
     public void fireStatsModified() {
         // Update the objects and repaint the chart with new values
         update();
     }
-
+    
     public void update() {
         drawableObjs = new ArrayList<Drawable>();
         List<Result> results = getStats().getResults();
         maxValue = 0;
+        width = 0;
         
-        // Get the max value to handle max bar height
-        /*double maxValue = 0;
-        for(Result result : results)
-            for(int value : result.getValues())new 
-                maxValue = value > maxValue ? value : maxValue;*/
-        
-        // TODO: handle this in a better way...
-        int posX = 2;
-
         for(Result result : results) {
-            
             HistogramResults histResult = new HistogramResults();
             
             for(int value : result.getValues()) {
                 histResult.addBar(value);
-                
                 maxValue = value > maxValue ? value : maxValue;
+                width += HistogramBar.WIDTH + HistogramBar.PADDING;
             }
             
             drawableObjs.add(histResult);
-            
-            //drawableObjs.add(new HistogramResults(result.getValues()));
-            
-            /*for(int value : result.getValues()) {
-                //int barHeight = (int)(value / maxValue * getHeight());
-                //System.out.println("val: " + value + " max: " + maxValue + "height: " + getHeight());
-                
-                //drawableObjs.add(new HistogramBar(Color.BLUE, posX, value));
-                //posX += 22;
-                
-                //bars.ad
-                histResults.addBar(new HistogramBar(value));
-                
-                maxValue = value > maxValue ? value : maxValue;
-            }*/
+            width += HistogramResults.PADDING;
         }
         
-        // TODO: adapt size
-        //setPreferredSize(new Dimension(500, getHeight()));
+        drawableObjs.add(new HistogramAxes());
+        
+        // TODO: Adapt size of the component (for scrolling)
+        //setPreferredSize(new Dimension(width, getHeight()));
         
         repaint();
     }
@@ -81,7 +60,6 @@ public class HistogramView extends GraphView {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
-        //g2d.drawString("Hello", 15, 15);
         GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());;
         
         g2d.translate(0, PADDING_BOTTOM);
@@ -93,12 +71,4 @@ public class HistogramView extends GraphView {
             g2d.translate(30, 0);
         }
     }
-    
-    /*private void drawBars(Graphics2D g2d) {
-        
-    }
-    
-    private void drawAxe(Graphics2D g2d) {
-        
-    }*/
 }

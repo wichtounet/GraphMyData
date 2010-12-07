@@ -11,7 +11,6 @@ public class HistogramAxes implements Drawable {
 
     @Override
     public void draw(Graphics2D g2d) {
-        // TODO Auto-generated method stub
-        
+        //g2d.drawLine(0, 5, 150, 5);
     }
 }
