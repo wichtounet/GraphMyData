@@ -42,7 +42,7 @@ public class HistogramView extends GraphView {
             for(int value : result.getValues()) {
                 histResult.addBar(value);
                 maxValue = value > maxValue ? value : maxValue;
-                width += HistogramBar.WIDTH + HistogramResults.PADDING;
+                width += HistogramBar.WIDTH + HistogramBar.PADDING;
             }
             
             drawableObjs.add(histResult);
@@ -52,7 +52,6 @@ public class HistogramView extends GraphView {
         drawableObjs.add(new HistogramAxes());
         
         // Adapt size of the component (for scrolling)
-        System.out.println("width: " + width);
         setPreferredSize(new Dimension(width, getHeight()));
         
         repaint();
