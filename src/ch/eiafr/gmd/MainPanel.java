@@ -3,17 +3,13 @@ package ch.eiafr.gmd;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 public final class MainPanel extends JPanel implements StatsListener {
-    private JScrollPane scroll;
-
     public MainPanel(Stats stats, StatsController controller) {
         super(new GridBagLayout());
 
@@ -78,7 +74,7 @@ public final class MainPanel extends JPanel implements StatsListener {
         HistogramView histogramView = new HistogramView(stats);
         stats.addStatsListener(histogramView);
 
-        scroll = new JScrollPane(histogramView);
+        JScrollPane scroll = new JScrollPane(histogramView);
         scroll.setBorder(BorderFactory.createEmptyBorder());
         add(scroll, constraints);
 
@@ -88,10 +84,5 @@ public final class MainPanel extends JPanel implements StatsListener {
     @Override
     public void fireStatsModified() {
         SwingUtilities.updateComponentTreeUI(this);
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }
