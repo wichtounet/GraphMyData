@@ -13,15 +13,20 @@ import ch.eiafr.gmd.helpers.GraphicsUtils;
  */
 public class HistogramView extends GraphView {
     
-    private static final int PADDING_BOTTOM = 10;
-
-    private List<Drawable> drawableObjs;
-    private double maxValue;
+    public static final int PADDING_TOP    = 5;
+    public static final int PADDING_BOTTOM = 5;
+    public static final int BAR_START      = 30;
+    //private static final int PADDING = 20;
+    
+    private HistogramAxis axis;
+    private List<Drawable> drawableResults;
+    private int maxValue;
     private int width;
     
     protected HistogramView(Stats stats) {
         super(stats);
         update();
+        //setBorder(BorderFactory.createEmptyBorder(PADDING, PADDING, PADDING, PADDING));
     }
     
     @Override
@@ -30,11 +35,11 @@ public class HistogramView extends GraphView {
         update();
     }
     
-    public void update() {
-        drawableObjs = new ArrayList<Drawable>();
+    private void update() {
+        drawableResults = new ArrayList<Drawable>();
         List<Result> results = getStats().getResults();
         maxValue = 0;
-
+        
         width = 0;
         
         for(Result result : results) {
@@ -46,28 +51,34 @@ public class HistogramView extends GraphView {
                 width += HistogramBar.WIDTH + HistogramBar.PADDING;
             }
             
-            drawableObjs.add(histResult);
+            drawableResults.add(histResult);
             width += HistogramResults.PADDING;
         }
-
-        drawableObjs.add(new HistogramAxes());
+        
+        //drawableResults.add(new HistogramAxes(maxValue));
+        axis = new HistogramAxis(maxValue);
         
         // Adapt size of the component (for scrolling)
-        setPreferredSize(new Dimension(width, getHeight()));
+        //setPreferredSize(new Dimension(width, getHeight()));
         
         repaint();
     }
-
+    
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
+        
+        // Draw the y axis
+        axis.setHeight(getHeight() - PADDING_TOP - PADDING_BOTTOM);
+        axis.draw(g2d);
+        
+        // Adapt the height of the graph
         GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());
+        g2d.translate(BAR_START, PADDING_BOTTOM);
+        g2d.scale(1, (getHeight() - PADDING_TOP - PADDING_BOTTOM) / (double)maxValue);
         
-        g2d.translate(0, PADDING_BOTTOM);
-        g2d.scale(1, (getHeight() - PADDING_BOTTOM) / (double)maxValue);
-        
-        // Draw all objects
-        for(Drawable object : drawableObjs) {
+        // Draw all results
+        for(Drawable object : drawableResults) {
             object.draw(g2d);
         }
     }
