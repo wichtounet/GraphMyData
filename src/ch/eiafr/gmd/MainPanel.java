@@ -1,14 +1,19 @@
 package ch.eiafr.gmd;
 
-import javax.swing.JComponent;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
 
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 public final class MainPanel extends JPanel implements StatsListener {
+    private JScrollPane scroll;
+
     public MainPanel(Stats stats, StatsController controller) {
         super(new GridBagLayout());
 
@@ -55,7 +60,7 @@ public final class MainPanel extends JPanel implements StatsListener {
         constraints.gridheight = GridBagConstraints.RELATIVE;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        constraints.weighty = 1.0;
+        constraints.weighty = 0.5;
         constraints.weightx = 1.0;
 
         PieChartView pieChartView = new PieChartView(stats);
@@ -68,13 +73,13 @@ public final class MainPanel extends JPanel implements StatsListener {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        constraints.insets = new Insets(0, 0, 10, 10);
+        constraints.insets = new Insets(10, 10, 10, 10);
 
         HistogramView histogramView = new HistogramView(stats);
         stats.addStatsListener(histogramView);
 
-        JComponent scroll = new JScrollPane(histogramView);
-        scroll.setBorder(null);
+        scroll = new JScrollPane(histogramView);
+        scroll.setBorder(BorderFactory.createEmptyBorder());
         add(scroll, constraints);
 
         stats.addStatsListener(this);
@@ -82,6 +87,11 @@ public final class MainPanel extends JPanel implements StatsListener {
 
     @Override
     public void fireStatsModified() {
-        revalidate();
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }
