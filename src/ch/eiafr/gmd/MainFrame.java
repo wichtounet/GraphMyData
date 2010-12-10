@@ -18,5 +18,6 @@ public class MainFrame extends JFrame {
         setMinimumSize(getSize());
 
         setContentPane(new MainPanel(stats, controller));
+        //setContentPane(new HistogramView(stats));
     }
 }

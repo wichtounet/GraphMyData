@@ -7,15 +7,15 @@ import java.awt.Graphics2D;
  * Represent a bar in an histogram graph
  */
 public class HistogramBar implements Drawable {
+    public static final int PADDING = 5;
+    public static final int WIDTH = 25;
 
-    Color color;
-    int position;
-    int height;
+    private Color color;
+    private int value;
 
-    public HistogramBar(Color color, int position, int height) {
+    public HistogramBar(Color color, int position, int value) {
         this.color = color;
-        this.position = position;
-        this.height = height;
+        this.value = value;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class HistogramBar implements Drawable {
         Color contextColor = g2d.getColor();
 
         g2d.setColor(color);
-        g2d.fillRect(position, 0, 20, height);
+        g2d.fillRect(0, 0, WIDTH, value);
         g2d.setColor(contextColor);
     }
 }

@@ -1,89 +1,74 @@
 package ch.eiafr.gmd;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.eiafr.gmd.helpers.GraphicsUtils;
 
 /**
  * View to draw an histogram graph
  */
 public class HistogramView extends GraphView {
+    
+    private static final int PADDING_BOTTOM = 10;
 
     private List<Drawable> drawableObjs;
     private double maxValue;
-
+    private int width;
+    
     protected HistogramView(Stats stats) {
         super(stats);
         update();
     }
-
+    
     @Override
     public void fireStatsModified() {
         // Update the objects and repaint the chart with new values
         update();
     }
-
+    
     public void update() {
         drawableObjs = new ArrayList<Drawable>();
         List<Result> results = getStats().getResults();
         maxValue = 0;
 
-        // Get the max value to handle max bar height
-        /*double maxValue = 0;
-        for(Result result : results)
-            for(int value : result.getValues())
-                maxValue = value > maxValue ? value : maxValue;*/
-
-        // TODO: handle this in a better way...
-        int posX = 2;
-
-        for (Result result : results) {
-            for (int value : result.getValues()) {
-                //int barHeight = (int)(value / maxValue * getHeight());
-                //System.out.println("val: " + value + " max: " + maxValue + "height: " + getHeight());
-
-                drawableObjs.add(new HistogramBar(Color.BLUE, posX, value));
-
-                posX += 22;
-
+        width = 0;
+        
+        for(Result result : results) {
+            HistogramResults histResult = new HistogramResults();
+            
+            for(int value : result.getValues()) {
+                histResult.addBar(value);
                 maxValue = value > maxValue ? value : maxValue;
+                width += HistogramBar.WIDTH + HistogramBar.PADDING;
             }
+            
+            drawableObjs.add(histResult);
+            width += HistogramResults.PADDING;
         }
 
-        // TODO: adapt size
-        //setPreferredSize(new Dimension(500, getHeight()));
+        drawableObjs.add(new HistogramAxes());
+        
+        // TODO: Adapt size of the component (for scrolling)
+        //setPreferredSize(new Dimension(width, getHeight()));
 
         repaint();
     }
 
     @Override
     public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        //g2d.setTransform(getCartesianCoordinateTransform(100, new Insets(0, 0, 0, 0)));
-        AffineTransform transform = getCartesianCoordinateTransform(getHeight(), new Insets(0, 0, 0, 0));
-        //g2d.transform(transform);
-
-        //g2d.scale(1, getHeight() / maxValue);
-        g2d.drawString("Hello", 15, 15);
-
+        Graphics2D g2d = (Graphics2D)g;
+        GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());
+        
+        g2d.translate(0, PADDING_BOTTOM);
+        g2d.scale(1, (getHeight() - PADDING_BOTTOM) / (double)maxValue);
+        
         // Draw all objects
-        for (Drawable object : drawableObjs) {
+        for(Drawable object : drawableObjs) {
             object.draw(g2d);
+            g2d.translate(30, 0);
         }
-    }
-
-    private static AffineTransform getCartesianCoordinateTransform(int h, Insets insets) {
-        int insetsTop = insets.top;
-
-        AffineTransform reposition = new AffineTransform();
-        reposition.translate(0, h + insetsTop);
-        reposition.scale(1, -1);
-
-        return reposition;
     }
 }
