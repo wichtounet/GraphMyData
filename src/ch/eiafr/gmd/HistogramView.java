@@ -1,5 +1,6 @@
 package ch.eiafr.gmd;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -36,10 +37,10 @@ public class HistogramView extends GraphView {
 
         width = 0;
 
-        for(Result result : results) {
+        for (Result result : results) {
             HistogramResults histResult = new HistogramResults();
 
-            for(int value : result.getValues()) {
+            for (int value : result.getValues()) {
                 histResult.addBar(value);
                 maxValue = value > maxValue ? value : maxValue;
                 width += HistogramBar.WIDTH + HistogramBar.PADDING;
@@ -51,24 +52,23 @@ public class HistogramView extends GraphView {
 
         drawableObjs.add(new HistogramAxes());
 
-        // TODO: Adapt size of the component (for scrolling)
-        //setPreferredSize(new Dimension(width, getHeight()));
+        // Adapt size of the component (for scrolling)
+        setPreferredSize(new Dimension(width, getHeight()));
 
         repaint();
     }
 
     @Override
     public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());
 
         g2d.translate(0, PADDING_BOTTOM);
-        g2d.scale(1, (getHeight() - PADDING_BOTTOM) / (double)maxValue);
+        g2d.scale(1, (getHeight() - PADDING_BOTTOM) / (double) maxValue);
 
         // Draw all objects
-        for(Drawable object : drawableObjs) {
+        for (Drawable object : drawableObjs) {
             object.draw(g2d);
-            g2d.translate(30, 0);
         }
     }
 }
