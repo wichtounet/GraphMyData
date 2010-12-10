@@ -11,7 +11,7 @@ public class HistogramBar implements Drawable {
     Color color;
     int position;
     int height;
-    
+
     public HistogramBar(Color color, int position, int height) {
         this.color = color;
         this.position = position;
@@ -21,7 +21,7 @@ public class HistogramBar implements Drawable {
     @Override
     public void draw(Graphics2D g2d) {
         Color contextColor = g2d.getColor();
-        
+
         g2d.setColor(color);
         g2d.fillRect(position, 0, 20, height);
         g2d.setColor(contextColor);

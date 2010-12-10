@@ -13,7 +13,7 @@ public final class I18nHelper {
     public static String getString(String key) {
         try {
             return RESOURCE_BUNDLE.getString(key);
-        } catch (MissingResourceException e){
+        } catch (MissingResourceException e) {
             System.err.println(key + " has not been found in i18n bundle");
 
             return key;

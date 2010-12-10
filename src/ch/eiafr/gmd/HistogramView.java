@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -33,38 +32,38 @@ public class HistogramView extends GraphView {
         drawableObjs = new ArrayList<Drawable>();
         List<Result> results = getStats().getResults();
         maxValue = 0;
-        
+
         // Get the max value to handle max bar height
         /*double maxValue = 0;
         for(Result result : results)
             for(int value : result.getValues())
                 maxValue = value > maxValue ? value : maxValue;*/
-        
+
         // TODO: handle this in a better way...
         int posX = 2;
 
-        for(Result result : results) {
-            for(int value : result.getValues()) {
+        for (Result result : results) {
+            for (int value : result.getValues()) {
                 //int barHeight = (int)(value / maxValue * getHeight());
                 //System.out.println("val: " + value + " max: " + maxValue + "height: " + getHeight());
-                
+
                 drawableObjs.add(new HistogramBar(Color.BLUE, posX, value));
-                
+
                 posX += 22;
-                
+
                 maxValue = value > maxValue ? value : maxValue;
             }
         }
-        
+
         // TODO: adapt size
         //setPreferredSize(new Dimension(500, getHeight()));
-        
+
         repaint();
     }
 
     @Override
     public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         //g2d.setTransform(getCartesianCoordinateTransform(100, new Insets(0, 0, 0, 0)));
         AffineTransform transform = getCartesianCoordinateTransform(getHeight(), new Insets(0, 0, 0, 0));
         //g2d.transform(transform);
@@ -73,17 +72,18 @@ public class HistogramView extends GraphView {
         g2d.drawString("Hello", 15, 15);
 
         // Draw all objects
-        for(Drawable object : drawableObjs)
+        for (Drawable object : drawableObjs) {
             object.draw(g2d);
+        }
     }
-    
+
     private static AffineTransform getCartesianCoordinateTransform(int h, Insets insets) {
         int insetsTop = insets.top;
 
         AffineTransform reposition = new AffineTransform();
         reposition.translate(0, h + insetsTop);
         reposition.scale(1, -1);
-        
+
         return reposition;
     }
 }
