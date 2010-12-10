@@ -2,6 +2,7 @@ package ch.eiafr.gmd;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,10 +27,12 @@ public class AddPanel extends JPanel {
 
         layout.addRow("a<a2b");
         layout.addRow("c<c2d");
+        layout.addRow("e2f..");
 
         setLayout(layout);
 
         Action validateAction = new ValidateAction(controller, this);
+        Action cancelAction = new CancelAction(this);
 
         add(new JLabel(I18nHelper.getString("add.view.label.first")), "a");
 
@@ -43,6 +46,9 @@ public class AddPanel extends JPanel {
         SwingHelper.bind(textField2, validateAction, KeyEvent.VK_ENTER);
         add(textField2, "d");
 
+        add(new JButton(validateAction), "e");
+        add(new JButton(cancelAction), "f");
+
         setVisible(false);
     }
 
@@ -52,6 +58,9 @@ public class AddPanel extends JPanel {
     }
 
     public void stopAdd() {
+        textField1.setText("");
+        textField2.setText("");
+
         setVisible(false);
     }
 

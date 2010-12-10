@@ -6,10 +6,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 
+import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.SwingHelper;
 
 public class DataView extends JPanel {
@@ -22,7 +24,8 @@ public class DataView extends JPanel {
 
         build(controller);
 
-        setMinimumSize(getSize());
+        setPreferredSize(new Dimension(350, Config.getIntValue("frame.height")));
+        setMinimumSize(new Dimension(350, Config.getIntValue("frame.height")));
     }
 
     private void build(StatsController controller) {
@@ -30,8 +33,9 @@ public class DataView extends JPanel {
 
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.fill = GridBagConstraints.VERTICAL;
+        constraints.fill = GridBagConstraints.BOTH;
         constraints.weighty = 1.0;
+        constraints.weightx = 1.0;
 
         DataTableModel tableModel = new DataTableModel(stats);
         stats.addStatsListener(tableModel);
@@ -55,13 +59,12 @@ public class DataView extends JPanel {
 
         constraints.gridy = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1.0;
         constraints.weighty = 0.0;
 
         add(addPanel, constraints);
 
         constraints.gridy = 2;
-        constraints.fill = GridBagConstraints.NONE;
-        constraints.weighty = 0.0;
 
         Container buttonPanel = new JPanel();
 
