@@ -8,7 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-public final class MainPanel extends JPanel {
+public final class MainPanel extends JPanel implements StatsListener {
     public MainPanel(Stats stats, StatsController controller) {
         super(new GridBagLayout());
 
@@ -68,7 +68,7 @@ public final class MainPanel extends JPanel {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        constraints.insets = new Insets(10, 10, 0, 0);
+        constraints.insets = new Insets(0, 0, 10, 10);
 
         HistogramView histogramView = new HistogramView(stats);
         stats.addStatsListener(histogramView);
@@ -76,5 +76,12 @@ public final class MainPanel extends JPanel {
         JComponent scroll = new JScrollPane(histogramView);
         scroll.setBorder(null);
         add(scroll, constraints);
+
+        stats.addStatsListener(this);
+    }
+
+    @Override
+    public void fireStatsModified() {
+        revalidate();
     }
 }
