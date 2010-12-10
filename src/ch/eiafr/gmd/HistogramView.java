@@ -1,5 +1,6 @@
 package ch.eiafr.gmd;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -51,9 +52,9 @@ public class HistogramView extends GraphView {
 
         drawableObjs.add(new HistogramAxes());
         
-        // TODO: Adapt size of the component (for scrolling)
-        //setPreferredSize(new Dimension(width, getHeight()));
-
+        // Adapt size of the component (for scrolling)
+        setPreferredSize(new Dimension(width, getHeight()));
+        
         repaint();
     }
 
@@ -68,7 +69,6 @@ public class HistogramView extends GraphView {
         // Draw all objects
         for(Drawable object : drawableObjs) {
             object.draw(g2d);
-            g2d.translate(30, 0);
         }
     }
 }
