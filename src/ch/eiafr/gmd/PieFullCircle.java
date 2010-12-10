@@ -67,7 +67,7 @@ public class PieFullCircle implements Drawable{
                 if(value==0)continue;
                 
                 // Computing the angle
-                endAngle = (int) Math.round((((double)360*((double)value/(double)sum)))); 
+                endAngle = (int) (((double)360*((double)value/(double)sum))); 
                 
                 // Creation of the shapes
                 tmpArc   = new Arc2D.Double(x, y, width, height, startAngle, endAngle, Arc2D.PIE);

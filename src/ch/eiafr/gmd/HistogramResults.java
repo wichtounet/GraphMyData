@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class HistogramResults implements Drawable {
     
-    public static final int     PADDING = 5;
+    public static final int     PADDING = 10;
     public static final Color[] COLORS  = {Color.BLUE, Color.RED, Color.YELLOW};
 
     private List<HistogramBar> bars;
@@ -29,7 +29,8 @@ public class HistogramResults implements Drawable {
     public void draw(Graphics2D g2d) {
         for(HistogramBar bar : bars) {
             bar.draw(g2d);
-            g2d.translate(PADDING + HistogramBar.WIDTH, 0);
         }
+        
+        g2d.translate(PADDING, 0);
     }
 }

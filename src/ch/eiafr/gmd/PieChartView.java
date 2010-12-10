@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
  */
 public class PieChartView extends GraphView {
     
+    //private final Stats stats;
     
     protected PieChartView(Stats stats) {
         super(stats);

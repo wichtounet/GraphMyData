@@ -24,7 +24,7 @@ public final class MainPanel extends JPanel {
         constraints.gridwidth = 1;
 
         constraints.fill = GridBagConstraints.VERTICAL;
-        constraints.insets = new Insets(25,10,10,10);
+        constraints.insets = new Insets(25, 10, 10, 10);
         constraints.weighty = 1.0;
         constraints.weightx = 0.0;
 
@@ -36,7 +36,7 @@ public final class MainPanel extends JPanel {
         constraints.gridy = 1;
         constraints.gridheight = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
-        constraints.insets = new Insets(25,0,0,0);
+        constraints.insets = new Insets(25, 0, 0, 0);
 
         constraints.weighty = 0.0;
         constraints.weightx = 1.0;
@@ -68,9 +68,11 @@ public final class MainPanel extends JPanel {
         constraints.gridheight = GridBagConstraints.REMAINDER;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
+        constraints.insets = new Insets(10, 10, 0, 0);
+
         HistogramView histogramView = new HistogramView(stats);
         stats.addStatsListener(histogramView);
-        
+
         JComponent scroll = new JScrollPane(histogramView);
         scroll.setBorder(null);
         add(scroll, constraints);

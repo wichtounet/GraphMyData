@@ -42,7 +42,7 @@ public final class TextView extends JPanel implements StatsListener {
 
         bestLabel = new JLabel();
         add(bestLabel, "t");
-        
+
         Map<TextAttribute, Integer> fontAttributes = new HashMap<TextAttribute, Integer>(1);
         fontAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 
@@ -80,7 +80,7 @@ public final class TextView extends JPanel implements StatsListener {
         double average1 = 0;
         double average2 = 0;
 
-        for(Result result : stats.getResults()){
+        for (Result result : stats.getResults()) {
             average1 += result.getValues().get(0);
             average2 += result.getValues().get(1);
 
@@ -93,7 +93,7 @@ public final class TextView extends JPanel implements StatsListener {
 
         compute1.average = average1 / stats.getResults().size();
         compute2.average = average2 / stats.getResults().size();
-        
+
         //Ecart-type
         //Variance
         //Médiane
