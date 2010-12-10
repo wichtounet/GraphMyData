@@ -34,6 +34,7 @@ public class HistogramView extends GraphView {
         drawableObjs = new ArrayList<Drawable>();
         List<Result> results = getStats().getResults();
         maxValue = 0;
+
         width = 0;
         
         for(Result result : results) {
@@ -48,7 +49,7 @@ public class HistogramView extends GraphView {
             drawableObjs.add(histResult);
             width += HistogramResults.PADDING;
         }
-        
+
         drawableObjs.add(new HistogramAxes());
         
         // Adapt size of the component (for scrolling)

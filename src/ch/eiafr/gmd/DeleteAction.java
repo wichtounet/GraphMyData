@@ -25,7 +25,7 @@ public class DeleteAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(table.getSelectedRow() > -1){
+        if (table.getSelectedRow() > -1) {
             int row = table.getSelectedRow();
             Result result = tableModel.getResult(row);
 

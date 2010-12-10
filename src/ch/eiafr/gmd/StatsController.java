@@ -9,11 +9,11 @@ public class StatsController {
         this.stats = stats;
     }
 
-    public void addResult(Integer[] result){
+    public void addResult(Integer[] result) {
         stats.addResult(result);
     }
 
-    public void removeResult(Result result){
+    public void removeResult(Result result) {
         stats.removeResult(result);
     }
 }
