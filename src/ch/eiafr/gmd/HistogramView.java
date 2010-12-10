@@ -1,6 +1,5 @@
 package ch.eiafr.gmd;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ public class HistogramView extends GraphView {
     private List<Drawable> drawableResults;
     private int maxValue;
     private int width;
-    
+
     protected HistogramView(Stats stats) {
         super(stats);
         update();
         //setBorder(BorderFactory.createEmptyBorder(PADDING, PADDING, PADDING, PADDING));
     }
-    
+
     @Override
     public void fireStatsModified() {
         // Update the objects and repaint the chart with new values
@@ -41,11 +40,11 @@ public class HistogramView extends GraphView {
         maxValue = 0;
         
         width = 0;
-        
-        for(Result result : results) {
+
+        for (Result result : results) {
             HistogramResults histResult = new HistogramResults();
-            
-            for(int value : result.getValues()) {
+
+            for (int value : result.getValues()) {
                 histResult.addBar(value);
                 maxValue = value > maxValue ? value : maxValue;
                 width += HistogramBar.WIDTH + HistogramBar.PADDING;

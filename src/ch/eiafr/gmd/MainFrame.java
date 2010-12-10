@@ -2,6 +2,7 @@ package ch.eiafr.gmd;
 
 import javax.swing.JFrame;
 
+import java.awt.Dimension;
 import java.awt.HeadlessException;
 
 import ch.eiafr.gmd.helpers.Config;
@@ -15,7 +16,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setSize(Config.getIntValue("frame.width"), Config.getIntValue("frame.height"));
-        setMinimumSize(getSize());
+        setMinimumSize(new Dimension(Config.getIntValue("frame.width"), Config.getIntValue("frame.height")));
 
         setContentPane(new MainPanel(stats, controller));
         //setContentPane(new HistogramView(stats));
