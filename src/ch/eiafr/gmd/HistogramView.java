@@ -19,10 +19,6 @@ public class HistogramView extends GraphView {
     private double maxValue;
     private int width;
     
-    protected HistogramView(Stats stats) {
-        super(stats);
-        update();
-    }
     
     @Override
     public void fireStatsModified() {
@@ -40,11 +36,7 @@ public class HistogramView extends GraphView {
         for(Result result : results) {
             HistogramResults histResult = new HistogramResults();
             
-            for(int value : result.getValues()) {
-                histResult.addBar(value);
-                maxValue = value > maxValue ? value : maxValue;
-                width += HistogramBar.WIDTH + HistogramBar.PADDING;
-            }
+            //dddfjlfdjsklf
             
             drawableObjs.add(histResult);
             width += HistogramResults.PADDING;
@@ -57,13 +49,13 @@ public class HistogramView extends GraphView {
         
         repaint();
     }
-
+//youou
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         GraphicsUtils.transformCartesianCoordinates(g2d, getHeight());
-        
-        g2d.translate(0, PADDING_BOTTOM);
+        //asdf
+        //g2d.traadsfnslate(0, PADDING_BOTTOM);
         g2d.scale(1, (getHeight() - PADDING_BOTTOM) / (double)maxValue);
         
         // Draw all objects
