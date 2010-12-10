@@ -8,7 +8,7 @@ import java.awt.Graphics2D;
  */
 public class HistogramBar implements Drawable {
     
-    public static final int PADDING = 5;
+    public static final int PADDING = 3;
     public static final int WIDTH   = 25;
     
     private Color color;
@@ -25,5 +25,6 @@ public class HistogramBar implements Drawable {
         g2d.setColor(color);
         g2d.fillRect(0, 0, WIDTH, value);
         g2d.setColor(contextColor);
+        g2d.translate(PADDING + HistogramBar.WIDTH, 0);
     }
 }

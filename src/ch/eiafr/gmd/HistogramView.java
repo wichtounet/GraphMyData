@@ -1,5 +1,6 @@
 package ch.eiafr.gmd;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class HistogramView extends GraphView {
             for(int value : result.getValues()) {
                 histResult.addBar(value);
                 maxValue = value > maxValue ? value : maxValue;
-                width += HistogramBar.WIDTH + HistogramBar.PADDING;
+                width += HistogramBar.WIDTH + HistogramResults.PADDING;
             }
             
             drawableObjs.add(histResult);
@@ -50,8 +51,9 @@ public class HistogramView extends GraphView {
         
         drawableObjs.add(new HistogramAxes());
         
-        // TODO: Adapt size of the component (for scrolling)
-        //setPreferredSize(new Dimension(width, getHeight()));
+        // Adapt size of the component (for scrolling)
+        System.out.println("width: " + width);
+        setPreferredSize(new Dimension(width, getHeight()));
         
         repaint();
     }
@@ -67,7 +69,6 @@ public class HistogramView extends GraphView {
         // Draw all objects
         for(Drawable object : drawableObjs) {
             object.draw(g2d);
-            g2d.translate(30, 0);
         }
     }
 }
