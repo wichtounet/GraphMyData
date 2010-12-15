@@ -13,5 +13,4 @@ public interface Drawable {
      * @param g2d the context on which to draw this object
      */
     void draw(Graphics2D g2d);
-
 }
