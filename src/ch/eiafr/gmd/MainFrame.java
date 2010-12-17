@@ -16,9 +16,25 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setSize(Config.getIntValue("frame.width"), Config.getIntValue("frame.height"));
+        setLocationRelativeTo(null);
         setMinimumSize(new Dimension(Config.getIntValue("frame.width"), Config.getIntValue("frame.height")));
+        
+        setJMenuBar(new MainMenu(this));
 
         setContentPane(new MainPanel(stats, controller));
-        //setContentPane(new HistogramView(stats));
+    }
+    
+    public void openHelp() {
+        new HelpDialog(this);
+        
+    }
+
+    public void openAbout() {
+        new AboutDialog(this);
+    }
+    
+    public void quit() {
+        dispose();
+        System.exit(0);
     }
 }
