@@ -9,8 +9,12 @@ import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.I18nHelper;
 
 public class MainFrame extends JFrame {
+    private final Stats model;
+
     public MainFrame(Stats stats, StatsController controller) throws HeadlessException {
         super();
+
+        model = stats;
 
         setTitle(I18nHelper.getString("title"));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,5 +40,9 @@ public class MainFrame extends JFrame {
     public void quit() {
         dispose();
         System.exit(0);
+    }
+
+    public Stats getModel() {
+        return model;
     }
 }

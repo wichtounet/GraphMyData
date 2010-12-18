@@ -8,4 +8,6 @@ public interface Stats {
     void addStatsListener(StatsListener listener);
 
     void removeStatsListener(StatsListener listener);
+
+    void addRandomDatas();
 }

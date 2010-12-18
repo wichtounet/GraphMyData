@@ -13,9 +13,8 @@ import java.awt.geom.Rectangle2D;
  *
  */
 public class PieChartView extends GraphView {
-    
-    private static int MARGIN   = 10;
-    private static int SIZE_REC = 8;
+    private static final int MARGIN   = 10;
+    private static final int SIZE_REC = 8;
     
     protected PieChartView(Stats stats) {
         super(stats);
@@ -31,30 +30,32 @@ public class PieChartView extends GraphView {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        Graphics2D g2d = (Graphics2D)g;
-       
-        // Draw the legend of the pie charts
-        String titles[] = new String[]{"< 10","< 25","> 25"};
-        drawLegend(titles, g2d);
-        
-        int x = 50;
-        int y = MARGIN;
-        
+
         int[][] results = getValues();
-        
-        // Compute the maxsize of a pie chart
-        int size;
-        int maxWidth = (getWidth()-50-MARGIN)/results.length;
-        if(maxWidth<getHeight())
-            size = maxWidth;
-        else
-            size = getHeight()-2*MARGIN;
-        
-        // Draw the pie chart for all the application
-        for(int[] r:results)
-        {
-            new PieFullCircle(r,x,y,size,size).draw(g2d);
-            x+=size+3*MARGIN;
+
+        if(results.length > 0){
+            Graphics2D g2d = (Graphics2D) g;
+
+            // Draw the legend of the pie charts
+            String[] titles = {"< 10", "< 25", "> 25"};
+            drawLegend(titles, g2d);
+
+            int y = MARGIN;
+            int x = 60;
+
+            // Compute the maxsize of a pie chart
+            int size;
+            int maxWidth = (getWidth() - MARGIN) / results[0].length;
+            if (maxWidth < getHeight() - 2 * MARGIN)
+                size = maxWidth;
+            else
+                size = getHeight() - 2 * MARGIN;
+
+            // Draw the pie chart for all the application
+            for (int[] r : results) {
+                new PieFullCircle(r, x, y, size, size).draw(g2d);
+                x += size + 3 * MARGIN;
+            }
         }
     }
     

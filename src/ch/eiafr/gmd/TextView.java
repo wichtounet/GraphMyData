@@ -4,9 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Component;
-import java.awt.font.TextAttribute;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.Font;
 
 import ch.eiafr.gmd.helpers.I18nHelper;
 import com.atticlabs.zonelayout.swing.ZoneLayout;
@@ -26,6 +24,9 @@ public final class TextView extends JPanel implements StatsListener {
     private final ComputedStats compute1 = new ComputedStats();
     private final ComputedStats compute2 = new ComputedStats();
 
+    private final Component firstLabelTitle;
+    private final Component secondLabelTitle;
+
     protected TextView(Stats stats) {
         this.stats = stats;
 
@@ -43,15 +44,12 @@ public final class TextView extends JPanel implements StatsListener {
         bestLabel = new JLabel();
         add(bestLabel, "t");
 
-        Map<TextAttribute, Integer> fontAttributes = new HashMap<TextAttribute, Integer>(1);
-        fontAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-
-        Component firstLabelTitle = new JLabel(I18nHelper.getString("table.header.first"));
-        firstLabelTitle.setFont(firstLabelTitle.getFont().deriveFont(fontAttributes));
+        firstLabelTitle = new JLabel(I18nHelper.getString("table.header.first"));
+        firstLabelTitle.setFont(firstLabelTitle.getFont().deriveFont(Font.BOLD));
         add(firstLabelTitle, "z");
 
-        Component secondLabelTitle = new JLabel(I18nHelper.getString("table.header.second"));
-        secondLabelTitle.setFont(secondLabelTitle.getFont().deriveFont(fontAttributes));
+        secondLabelTitle = new JLabel(I18nHelper.getString("table.header.second"));
+        secondLabelTitle.setFont(secondLabelTitle.getFont().deriveFont(Font.BOLD));
         add(secondLabelTitle, "s");
 
         averageLabel1 = new JLabel();
@@ -77,42 +75,58 @@ public final class TextView extends JPanel implements StatsListener {
     }
 
     private void computeStats() {
-        double average1 = 0;
-        double average2 = 0;
+        if(!stats.getResults().isEmpty()){
+            double average1 = 0;
+            double average2 = 0;
 
-        for (Result result : stats.getResults()) {
-            average1 += result.getValues().get(0);
-            average2 += result.getValues().get(1);
+            for (Result result : stats.getResults()) {
+                average1 += result.getValues().get(0);
+                average2 += result.getValues().get(1);
 
-            compute1.min = Math.min(compute1.min, result.getValues().get(0));
-            compute2.min = Math.min(compute2.min, result.getValues().get(1));
+                compute1.min = Math.min(compute1.min, result.getValues().get(0));
+                compute2.min = Math.min(compute2.min, result.getValues().get(1));
 
-            compute1.max = Math.max(compute1.max, result.getValues().get(0));
-            compute2.max = Math.max(compute2.max, result.getValues().get(1));
+                compute1.max = Math.max(compute1.max, result.getValues().get(0));
+                compute2.max = Math.max(compute2.max, result.getValues().get(1));
+            }
+
+            compute1.average = average1 / stats.getResults().size();
+            compute2.average = average2 / stats.getResults().size();
         }
-
-        compute1.average = average1 / stats.getResults().size();
-        compute2.average = average2 / stats.getResults().size();
-
-        //Ecart-type
-        //Variance
-        //Médiane
-        //Minimax
     }
 
     private void refreshView() {
-        int best = compute1.average < compute2.average ? 1 : 2;
+        if (stats.getResults().isEmpty()) {
+            bestLabel.setText(I18nHelper.getString("text.best") + " : N/A");
+            
+            averageLabel1.setText("");
+            averageLabel2.setText("");
 
-        bestLabel.setText(I18nHelper.getString("text.best") + " : " + best);
+            minLabel1.setText("");
+            minLabel2.setText("");
 
-        averageLabel1.setText(String.format(I18nHelper.getString("text.average") + " : %.2fs", compute1.average));
-        averageLabel2.setText(String.format(I18nHelper.getString("text.average") + " : %.2fs", compute2.average));
+            maxLabel1.setText("");
+            maxLabel2.setText("");
 
-        minLabel1.setText(String.format(I18nHelper.getString("text.min") + " : %.2fs", compute1.min));
-        minLabel2.setText(String.format(I18nHelper.getString("text.min") + " : %.2fs", compute2.min));
+            firstLabelTitle.setVisible(false);
+            secondLabelTitle.setVisible(false);
+        } else {
+            int best = compute1.average < compute2.average ? 1 : 2;
 
-        maxLabel1.setText(String.format(I18nHelper.getString("text.max") + " : %.2fs", compute1.max));
-        maxLabel2.setText(String.format(I18nHelper.getString("text.max") + " : %.2fs", compute2.max));
+            bestLabel.setText(I18nHelper.getString("text.best") + " : " + best);
+
+            averageLabel1.setText(String.format(I18nHelper.getString("text.average") + " : %.2fs", compute1.average));
+            averageLabel2.setText(String.format(I18nHelper.getString("text.average") + " : %.2fs", compute2.average));
+
+            minLabel1.setText(String.format(I18nHelper.getString("text.min") + " : %.2fs", compute1.min));
+            minLabel2.setText(String.format(I18nHelper.getString("text.min") + " : %.2fs", compute2.min));
+
+            maxLabel1.setText(String.format(I18nHelper.getString("text.max") + " : %.2fs", compute1.max));
+            maxLabel2.setText(String.format(I18nHelper.getString("text.max") + " : %.2fs", compute2.max));
+
+            firstLabelTitle.setVisible(true);
+            secondLabelTitle.setVisible(true);
+        }
     }
 
     @Override
@@ -121,7 +135,7 @@ public final class TextView extends JPanel implements StatsListener {
         refreshView();
     }
 
-    private class ComputedStats {
+    private static class ComputedStats {
         private double average;
         private double min = Double.MAX_VALUE;
         private double max = Double.MIN_VALUE;

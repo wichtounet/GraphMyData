@@ -52,25 +52,28 @@ public class HistogramView extends GraphView {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        // Draw the y axis
-        axis.setHeight(getRealHeight() - PADDING_TOP - PADDING_BOTTOM);
-        axis.draw(g2d);
-        
-        // Adapt the height of the graph
-        GraphicsUtils.transformCartesianCoordinates(g2d, getRealHeight());
-        g2d.translate(BAR_START, PADDING_BOTTOM);
-        g2d.scale(1, (getRealHeight() - PADDING_TOP - PADDING_BOTTOM) / (double)maxValue);
-        
-        // Draw all results
-        for(Drawable object : drawableResults) {
-            object.draw(g2d);
+
+        if(!drawableResults.isEmpty()){
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            // Draw the y axis
+            axis.setHeight(getRealHeight() - PADDING_TOP - PADDING_BOTTOM);
+            axis.draw(g2d);
+
+            // Adapt the height of the graph
+            GraphicsUtils.transformCartesianCoordinates(g2d, getRealHeight());
+            g2d.translate(BAR_START, PADDING_BOTTOM);
+            g2d.scale(1, (getRealHeight() - PADDING_TOP - PADDING_BOTTOM) / (double)maxValue);
+
+            // Draw all results
+            for(Drawable object : drawableResults) {
+                object.draw(g2d);
+            }
         }
     }
     
     private void update() {
-        drawableResults = new ArrayList<Drawable>();
+        drawableResults = new ArrayList<Drawable>(20);
         List<Result> results = getStats().getResults();
         maxValue = 0;
         
