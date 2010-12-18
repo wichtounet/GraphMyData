@@ -66,7 +66,6 @@ public class MenuActions {
     class AboutAction extends AbstractAction {
         public AboutAction() {
             super(I18nHelper.getString("menu.help.about"));
-            putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(I18nHelper.getString("menu.help.about.accel")));
             putValue(AbstractAction.SHORT_DESCRIPTION, I18nHelper.getString("menu.help.about.desc"));
         }
 
