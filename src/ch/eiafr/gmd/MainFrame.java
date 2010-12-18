@@ -10,11 +10,13 @@ import ch.eiafr.gmd.helpers.I18nHelper;
 
 public class MainFrame extends JFrame {
     private final Stats model;
+    private final String language;
 
-    public MainFrame(Stats stats, StatsController controller) throws HeadlessException {
+    public MainFrame(Stats stats, StatsController controller, String language) throws HeadlessException {
         super();
 
         model = stats;
+        this.language = language;
 
         setTitle(I18nHelper.getString("title"));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -30,19 +32,17 @@ public class MainFrame extends JFrame {
     
     public void openHelp() {
         new HelpDialog(this);
-        
     }
 
     public void openAbout() {
         new AboutDialog(this);
     }
-    
-    public void quit() {
-        dispose();
-        System.exit(0);
-    }
 
     public Stats getModel() {
         return model;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 }

@@ -47,7 +47,7 @@ public class MenuActions {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainFrame.quit();
+            System.exit(0);
         }
     }
     

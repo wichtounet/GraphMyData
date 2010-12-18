@@ -12,4 +12,8 @@ public interface Stats {
     void addRandomDatas();
 
     void setValue(int rowIndex, int columnIndex, Integer value);
+
+    void addResult(Integer[] result);
+
+    void removeResult(Result result);
 }

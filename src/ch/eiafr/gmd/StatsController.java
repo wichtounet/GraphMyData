@@ -1,9 +1,9 @@
 package ch.eiafr.gmd;
 
 public class StatsController {
-    private final StatsModel stats;
+    private final Stats stats;
 
-    public StatsController(StatsModel stats) {
+    public StatsController(Stats stats) {
         super();
 
         this.stats = stats;

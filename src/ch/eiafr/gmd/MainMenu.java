@@ -2,6 +2,9 @@ package ch.eiafr.gmd;
 
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import ch.eiafr.gmd.helpers.I18nHelper;
 
 /**
@@ -16,7 +19,6 @@ public class MainMenu extends JMenuBar {
     private JMenuItem itemQuit;
     
     // TODO: also manage with actions??? or not necessary?
-    private JRadioButtonMenuItem itemDefault = new JRadioButtonMenuItem(I18nHelper.getString("menu.languages.default"));
     private JRadioButtonMenuItem itemEnglish = new JRadioButtonMenuItem(I18nHelper.getString("menu.languages.english"));
     private JRadioButtonMenuItem itemFrench  = new JRadioButtonMenuItem(I18nHelper.getString("menu.languages.french"));
     
@@ -36,22 +38,30 @@ public class MainMenu extends JMenuBar {
         itemHelp  = new JMenuItem(actions.ACTION_HELP);
         itemAbout = new JMenuItem(actions.ACTION_ABOUT);
         
-        buildMenu();
+        buildMenu(mainFrame);
         createShortcuts();
     }
 
-    private void buildMenu() {
+    private void buildMenu(MainFrame mainFrame) {
         ButtonGroup languagesGroup = new ButtonGroup();
-        languagesGroup.add(itemDefault);
         languagesGroup.add(itemEnglish);
         languagesGroup.add(itemFrench);
         
         menuFile.add(itemLoad);
         menuFile.add(itemQuit);
-        menuLanguages.add(itemDefault);
-        menuLanguages.add(new JSeparator());
+
+        itemFrench.addActionListener(new LanguageAction("fr", mainFrame));
+        itemEnglish.addActionListener(new LanguageAction("en", mainFrame));
+
         menuLanguages.add(itemEnglish);
         menuLanguages.add(itemFrench);
+
+        if("fr".equals(mainFrame.getLanguage())){
+            itemFrench.setSelected(true);
+        } else {
+            itemEnglish.setSelected(true);
+        }
+
         menuHelp.add(itemHelp);
         menuHelp.add(itemAbout);
         
@@ -64,5 +74,26 @@ public class MainMenu extends JMenuBar {
         menuFile.setMnemonic(I18nHelper.getString("menu.file.mnemonic").charAt(0));
         menuLanguages.setMnemonic(I18nHelper.getString("menu.languages.mnemonic").charAt(0));
         menuHelp.setMnemonic(I18nHelper.getString("menu.help.mnemonic").charAt(0));
+    }
+
+    private class LanguageAction implements ActionListener {
+        private final String language;
+        private final MainFrame mainFrame;
+
+        public LanguageAction(String language, MainFrame mainFrame) {
+            super();
+
+            this.language = language;
+            this.mainFrame = mainFrame;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!language.equals(mainFrame.getLanguage())){
+                mainFrame.dispose();
+
+                GraphMyData.launch(language, mainFrame.getModel());
+            }
+        }
     }
 }
