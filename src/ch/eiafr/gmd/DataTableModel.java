@@ -54,6 +54,21 @@ public class DataTableModel extends AbstractTableModel implements StatsListener 
         fireTableDataChanged();
     }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        stats.setValue(rowIndex, columnIndex, (Integer) aValue);
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return Integer.class;
+    }
+
     public Result getResult(int row) {
         return stats.getResults().get(row);
     }

@@ -10,4 +10,6 @@ public interface Stats {
     void removeStatsListener(StatsListener listener);
 
     void addRandomDatas();
+
+    void setValue(int rowIndex, int columnIndex, Integer value);
 }

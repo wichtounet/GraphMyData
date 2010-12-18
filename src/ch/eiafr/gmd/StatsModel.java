@@ -38,6 +38,17 @@ public final class StatsModel implements Stats {
         fireStatsModified();
     }
 
+    @Override
+    public void setValue(int rowIndex, int columnIndex, Integer value) {
+        if(rowIndex >= results.size()){
+            return;
+        }
+
+        results.get(rowIndex).getValues().set(columnIndex, value);
+
+        fireStatsModified();
+    }
+
     private void fireStatsModified() {
         for (StatsListener listener : listeners) {
             listener.fireStatsModified();

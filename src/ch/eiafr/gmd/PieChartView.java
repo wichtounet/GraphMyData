@@ -65,17 +65,25 @@ public class PieChartView extends GraphView {
      */
     private int[][] getValues()
     {
-        int[][] values = new int[getStats().getResults().size()][3];
+        if(getStats().getResults().isEmpty()){
+            return new int[0][0];
+        }
+
+        int[][] values = new int[getStats().getResults().get(0).getValues().size()][3];
         int i = 0;
         for(Result r:getStats().getResults())
         {
             i = 0;
             for(int value:r.getValues())
             {
-                if(value<10)values[i][0]++;
-                else if(value<25)values[i][1]++;
-                else values[i][2]++;
-                
+                if(value<10) {
+                    values[i][0]++;
+                } else if(value<25) {
+                    values[i][1]++;
+                } else {
+                    values[i][2]++;
+                }
+
                 i++;
             }
         }
