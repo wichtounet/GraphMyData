@@ -1,10 +1,10 @@
 package ch.eiafr.gmd;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-
-import java.awt.event.ActionEvent;
 
 import ch.eiafr.gmd.helpers.I18nHelper;
 
@@ -16,6 +16,8 @@ public class MenuActions {
     
     public final Action ACTION_LOAD  = new LoadAction();
     public final Action ACTION_QUIT  = new QuitAction();
+    public final Action ACTION_EN    = new LanguageAction("en");
+    public final Action ACTION_FR    = new LanguageAction("fr");
     public final Action ACTION_HELP  = new HelpAction();
     public final Action ACTION_ABOUT = new AboutAction();
 
@@ -25,7 +27,7 @@ public class MenuActions {
         this.mainFrame = mainFrame;
     }
     
-    class LoadAction extends AbstractAction {
+    private class LoadAction extends AbstractAction {
         LoadAction() {
             super(I18nHelper.getString("menu.file.load"));
             putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(I18nHelper.getString("menu.file.load.accel")));
@@ -38,7 +40,7 @@ public class MenuActions {
         }
     }
 
-    class QuitAction extends AbstractAction {
+    private class QuitAction extends AbstractAction {
         QuitAction() {
             super(I18nHelper.getString("menu.file.quit"));
             putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(I18nHelper.getString("menu.file.quit.accel")));
@@ -51,7 +53,26 @@ public class MenuActions {
         }
     }
     
-    class HelpAction extends AbstractAction {
+    private class LanguageAction extends AbstractAction {
+        private final String language;
+
+        public LanguageAction(String language) {
+            super(I18nHelper.getString("menu.languages." + language));
+            
+            this.language = language;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!language.equals(mainFrame.getLanguage())){
+                mainFrame.dispose();
+
+                GraphMyData.launch(language, mainFrame.getModel());
+            }
+        }
+    }
+    
+    private class HelpAction extends AbstractAction {
         HelpAction() {
             super(I18nHelper.getString("menu.help.help"));
             putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(I18nHelper.getString("menu.help.help.accel")));
@@ -64,7 +85,7 @@ public class MenuActions {
         }
     }
     
-    class AboutAction extends AbstractAction {
+    private class AboutAction extends AbstractAction {
         AboutAction() {
             super(I18nHelper.getString("menu.help.about"));
             putValue(AbstractAction.SHORT_DESCRIPTION, I18nHelper.getString("menu.help.about.desc"));
@@ -75,5 +96,4 @@ public class MenuActions {
             mainFrame.openAbout();
         }
     }
-    
 }
