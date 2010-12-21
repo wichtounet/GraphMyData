@@ -18,7 +18,7 @@ public class HistogramView extends GraphView {
     public static final int PADDING_TOP    = 5;
     public static final int PADDING_BOTTOM = 5;
     public static final int BAR_START      = 30;
-    private static final double HEIGHT_FACTOR = 0.9;
+    private static final double HEIGHT_FACTOR = 0.8;
     
     private HistogramAxis axis;
     private List<Drawable> drawableResults;
