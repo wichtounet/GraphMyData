@@ -3,6 +3,8 @@ package ch.eiafr.gmd;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+import ch.eiafr.gmd.helpers.I18nHelper;
+
 /**
  * Class to display a pie chart 
  * 
@@ -33,6 +35,7 @@ public class PieChartView extends GraphView {
 
             // Antialiasing
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
             // Draw the legend of the pie charts
             String[] titles = {"< 10", "< 25", "> 25"};
@@ -44,14 +47,18 @@ public class PieChartView extends GraphView {
             // Compute the maxsize of a pie chart
             int size;
             int maxWidth = (getWidth() - MARGIN) / results[0].length;
-            if (maxWidth < getHeight() - 2 * MARGIN)
+            if (maxWidth < getHeight() - 4 * MARGIN)
                 size = maxWidth;
             else
-                size = getHeight() - 2 * MARGIN;
-
+                size = getHeight() - 4 * MARGIN;
+            
+            String[] strValue = new String[]{I18nHelper.getString("table.header.first"),
+                                             I18nHelper.getString("table.header.second")};
+            
             // Draw the pie chart for all the application
-            for (int[] r : results) {
-                new PieFullCircle(r, x, y, size, size).draw(g2d);
+            for (int i=0;i<results.length;i++) {
+                new PieFullCircle(results[i], x, y, size, size).draw(g2d);
+                if(i<strValue.length)g2d.drawString(strValue[i], x, y+size+2*MARGIN);
                 x += size + 3 * MARGIN;
             }
         }
