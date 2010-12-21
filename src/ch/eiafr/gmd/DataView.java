@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
 import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.SwingHelper;
 
-public class DataView extends JPanel {
+public class DataView extends JPanel implements StatsListener {
     private final Stats stats;
 
     public DataView(Stats stats, StatsController controller) {
@@ -26,6 +26,8 @@ public class DataView extends JPanel {
 
         setPreferredSize(new Dimension(350, Config.getIntValue("frame.height")));
         setMinimumSize(new Dimension(350, Config.getIntValue("frame.height")));
+
+        stats.addStatsListener(this);
     }
 
     private void build(StatsController controller) {
@@ -74,4 +76,8 @@ public class DataView extends JPanel {
         add(buttonPanel, constraints);
     }
 
+    @Override
+    public void fireStatsModified() {
+        //Nothing to do here
+    }
 }
