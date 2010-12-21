@@ -1,5 +1,15 @@
 package ch.eiafr.gmd;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,10 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
+import java.net.URL;
 
 import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.I18nHelper;
@@ -21,7 +28,7 @@ import ch.eiafr.gmd.helpers.I18nHelper;
  */
 public class HelpDialog extends JDialog implements HyperlinkListener {
     
-    private static String HELP_CONTENT = "help/help.html";
+    private static String HELP_CONTENT = "ch/eiafr/gmd/resources/help.html";
     
     /**
      * Constructor
@@ -57,8 +64,11 @@ public class HelpDialog extends JDialog implements HyperlinkListener {
         gbc.weighty = 1.0;
         
         // Create the JEditorPane from the help HTML file
-        File helpFile = new File(HELP_CONTENT);
-        JEditorPane helpPane = new JEditorPane(helpFile.toURI().toURL());
+        URL help = getClass().getClassLoader().getResource(HELP_CONTENT);
+
+        System.out.println("help = " + help);
+
+        JEditorPane helpPane = new JEditorPane(help);
         helpPane.setEditable(false);
         helpPane.addHyperlinkListener(this);
         
