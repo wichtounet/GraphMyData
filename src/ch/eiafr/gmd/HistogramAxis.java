@@ -40,7 +40,7 @@ public class HistogramAxis implements Drawable {
             drawIndicator(g2d, indicatorHeight, indicatorValue);
         }
         
-        g2d.translate(0, -HistogramView.PADDING_TOP);
+        g2d.translate(10, -HistogramView.PADDING_TOP);
     }
     
     /**
