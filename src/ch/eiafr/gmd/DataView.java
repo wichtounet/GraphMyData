@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -43,6 +44,7 @@ public class DataView extends JPanel implements StatsListener {
         stats.addStatsListener(tableModel);
 
         JTable table = new JTable(tableModel);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         AddPanel addPanel = new AddPanel(controller);
 
