@@ -12,6 +12,7 @@ public class HistogramAxis implements Drawable {
     public static final int INDICATOR_POS_X    = 10;
     public static final int INDICATOR_WIDTH    = 4;
     public static final int INDICATOR_TEXT_GAP = 4;
+    public static final int PADDING_RIGHT      = 10;
     
     private int componentHeight;
     private int maxValue;
@@ -40,7 +41,7 @@ public class HistogramAxis implements Drawable {
             drawIndicator(g2d, indicatorHeight, indicatorValue);
         }
         
-        g2d.translate(10, -HistogramView.PADDING_TOP);
+        g2d.translate(PADDING_RIGHT, -HistogramView.PADDING_TOP);
     }
     
     /**

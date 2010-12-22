@@ -16,7 +16,7 @@ public class HistogramView extends GraphView {
     
     // Constants
     public static final int PADDING_TOP    = 5;
-    public static final int PADDING_BOTTOM = 5;
+    public static final int PADDING_BOTTOM = 0;
     public static final int BAR_START      = 30;
     private static final double HEIGHT_FACTOR = 0.8;
     
@@ -77,7 +77,7 @@ public class HistogramView extends GraphView {
         List<Result> results = getStats().getResults();
         maxValue = 0;
         
-        width = 0;
+        width = HistogramAxis.PADDING_RIGHT + 20;
 
         for (Result result : results) {
             HistogramResults histResult = new HistogramResults();
@@ -92,7 +92,6 @@ public class HistogramView extends GraphView {
             width += HistogramResults.PADDING;
         }
         
-        //drawableResults.add(new HistogramAxes(maxValue));
         axis = new HistogramAxis(maxValue);
         
         // Adapt size of the component (for scrolling)
