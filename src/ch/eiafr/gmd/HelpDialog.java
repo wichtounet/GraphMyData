@@ -1,23 +1,16 @@
 package ch.eiafr.gmd;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
-
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
 import ch.eiafr.gmd.helpers.Config;
 import ch.eiafr.gmd.helpers.I18nHelper;
@@ -28,7 +21,7 @@ import ch.eiafr.gmd.helpers.I18nHelper;
  */
 public class HelpDialog extends JDialog implements HyperlinkListener {
     
-    private static String HELP_CONTENT = "ch/eiafr/gmd/resources/help.html";
+    private static String HELP_PATH = "ch/eiafr/gmd/resources/";
     
     /**
      * Constructor
@@ -64,9 +57,7 @@ public class HelpDialog extends JDialog implements HyperlinkListener {
         gbc.weighty = 1.0;
         
         // Create the JEditorPane from the help HTML file
-        URL help = getClass().getClassLoader().getResource(HELP_CONTENT);
-
-        System.out.println("help = " + help);
+        URL help = getClass().getClassLoader().getResource(HELP_PATH + I18nHelper.getString("help.file.name"));
 
         JEditorPane helpPane = new JEditorPane(help);
         helpPane.setEditable(false);
@@ -79,13 +70,8 @@ public class HelpDialog extends JDialog implements HyperlinkListener {
         lb.setFont(lb.getFont().deriveFont(20.0f));
         add(lb, gbc);
         
-        // Description
-        JLabel description = new JLabel(I18nHelper.getString("helpdialog.content.desc"));
-        gbc.gridy = 1;
-        add(description, gbc);
-        
         // Help content
-        gbc.gridy = 2;
+        gbc.gridy = 1;
         gbc.weighty = 8.0;
         add(scrollHelp, gbc);
         
@@ -98,7 +84,7 @@ public class HelpDialog extends JDialog implements HyperlinkListener {
             }
         });
         
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.NONE;
         add(buttonClose, gbc);
